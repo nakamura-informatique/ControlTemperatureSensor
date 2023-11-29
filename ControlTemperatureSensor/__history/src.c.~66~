@@ -1,0 +1,71 @@
+#include <16F877A.h>
+#device ADC=10
+#fuses NOWDT, NOBROWNOUT, NOLVP, HS, NOPROTECT, BROWNOUT
+#use delay(crystal=4000000) // khai bao thach anh
+#include <math.h>
+
+unsigned int8 Anode_Code[]= //Mã Hexa //Anode chung
+   {  
+      0xC0,          //0
+      0xF9,          //1
+      0xA4,          //2
+      0xB0,          //3
+      0x99,          //4
+      0x92,          //5
+      0x82,          //6
+      0xF8,          //7
+      0x80,          //8
+      0x90,          //9
+      0xBF,          // minus
+      0xC0           //plus
+   };
+
+void main()
+{
+   signed      int16    Temperature           ; //-128->127
+   signed      int16    adc_value;
+   unsigned    int16    temps_temperature;
+   signed      int16    adc_value_1;
+   signed      int16    adc_value_2;
+   signed      int16    adc_volt_1;
+   signed      int16    adc_volt_2;
+   
+   setup_adc_ports(AN0); // chon cong nhan du lieu tu cam bien nhiet do
+   
+   setup_adc(ADC_CLOCK_INTERNAL); //thoi gian lay mau bang xung clock ic
+   
+   set_adc_channel(0); // chon kenh 0 de doc du lieu
+   
+   while(TRUE)
+   {
+      //adc_value_1   =  read_adc(AN0);
+      //adc_value_2   =  read_adc(AN1);
+      //Temperature = V_cam bien/10
+      //V_cam bien = adc x ADC_10_Bit_Resolution
+      //=>Temperature = (adc x ADC_10_Bit_Resolution)/10
+      //adc_volt_1  =  ((adc_value_1*2.56)/1024);
+      //adc_volt_2  =  ((adc_value_2*2.56)/1024);
+      
+      //Temperature =  (adc_volt_1-adc_volt_2)*100;
+      Temperature                =     adc_value*0.489;
+//!      if(Temperature<0)
+//!      {
+//!      temps_temperature =  (unsigned int16)Temperature;
+//!      output_b    (Anode_Code[10]);
+//!      output_c    (Anode_Code[temps_temperature/10]);//nhiet do 25/10 = 2
+//!      output_d    (Anode_Code[temps_temperature%10]);//nhiet do 25%10 =5
+//!      }else
+      if(Temperature<100)
+      {
+      output_b    (Anode_Code[0]);
+      output_c    (Anode_Code[Temperature/10]);//nhiet do 25/10 = 2
+      output_d    (Anode_Code[Temperature%10]);//nhiet do 25%10 =5
+      }else
+      if(Temperature>=100)
+      {
+      output_b    (Anode_Code[Temperature/100]);
+      output_c    (Anode_Code[(Temperature/10)%10]);//nhiet do 25/10 = 2
+      output_d    (Anode_Code[Temperature%10]);//nhiet do 25%10 =5
+      }
+   }
+}

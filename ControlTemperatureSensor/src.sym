@@ -1,0 +1,85 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020-02B Anode_Code
+02C     @TRIS_C
+02D     MAIN.Temperature
+02D-030 atan2.y
+02E     MAIN.adc_value
+02F-032 @SFTOI.P1
+02F-030 @ITOF.P2
+02F-032 @MULFF.P3
+02F     MAIN.@SCRATCH1
+030     @DIV88.P1
+031     @DIV88.P1
+031-034 atan2.x
+032     @DIV88.@SCRATCH1
+033-036 @MULFF.P1
+035-038 atan2.z
+037     @MULFF.@SCRATCH1
+038     @MULFF.@SCRATCH2
+039.0   atan2.sign
+039     @MULFF.@SCRATCH3
+03A     atan2.quad
+03A     @MULFF.@SCRATCH4
+03B     @MULFF.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @ITOF
+000023  @MULFF
+00009A  @SFTOI
+0000BB  @DIV88
+0000D0  MAIN
+0000D0  @cinit1
+0000DC  @cinit2
+
+Project Directory:
+    C:\Users\dell\Desktop\Project_Mic_3\
+
+Project Files:
+    src.c                                                   [24-Nov-23 11:30  CRC=95CA0D21]
+    E:\CCS C Compiler 5.109\Install Directory\Devices\16F877A.h [06-May-22 15:52  CRC=4E256CC5]
+    E:\CCS C Compiler 5.109\Install Directory\Drivers\math.h [05-May-20 13:57  CRC=02232397]
+
+Source signature=E835C114
+Program memory checksum=0000
+Hex file CRC=D30F
+
+Units:
+    C:\Users\dell\Desktop\Project_Mic_3\src (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Output Files:
+    XREF file:   src.xsym
+    Errors:      src.err
+    Ext Symbols: src.esym
+    INHX8:       src.hex
+    Symbols:     src.sym
+    List:        src.lst
+    Debug/COFF:  src.cof
+    Project:     src.ccspjt
+    Call Tree:   src.tre
+    Statistics:  src.STA
